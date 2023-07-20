@@ -2,13 +2,9 @@ package com.luv2code.springboot.cruddemo.rest;
 
 import com.luv2code.springboot.cruddemo.entity.Employee;
 import com.luv2code.springboot.cruddemo.service.EmployeeService;
-import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Enumeration;
 import java.util.List;
 
 @RestController
@@ -31,23 +27,14 @@ public class EmployeeRestController {
     // add mapping for GET /employees/{employeeId}
 
     @GetMapping("/employees/{employeeId}")
-    public Employee getEmployee(@PathVariable int employeeId, HttpServletRequest httpServletRequest, HttpServletResponse servletResponse) {
-
+    public Employee getEmployee(@PathVariable int employeeId) {
 
         Employee theEmployee = employeeService.findById(employeeId);
 
         if (theEmployee == null) {
             throw new RuntimeException("Employee id not found - " + employeeId);
         }
-        //servletResponse.addCookie(new Cookie("myCookie1", "cookieVal1"));
-        //servletResponse.addCookie(new Cookie("myCookie2", "cookieVal2"));
-        //servletResponse.addCookie(new Cookie("myCookie3", "cookieVal3"));
 
-        //Above and below is same code to add our custom cookie
-
-        servletResponse.addHeader("Set-Cookie", "myCookie1=cookieVal1");
-        //servletResponse.addHeader("Set-Cookie", "myCookie2=cookieVal2");
-        //servletResponse.addHeader("Set-Cookie", "myCookie3=cookieVal3");
         return theEmployee;
     }
 
@@ -97,29 +84,7 @@ public class EmployeeRestController {
 }
 
 
-    /*@GetMapping("/employees/{employeeId}")
-    public Employee getEmployee(@PathVariable int employeeId, HttpServletRequest httpServletRequest, HttpServletResponse servletResponse) {
 
-        Enumeration<String> headerNames = httpServletRequest.getHeaderNames();
-        while (headerNames.hasMoreElements()) {
-            String headerName = headerNames.nextElement();
-            String headerValue = httpServletRequest.getHeader(headerName);
-            System.out.println(headerName + " : " + headerValue);
-        }
-        System.out.println("----------------------------------------------------------------------------------");
-        Employee theEmployee = employeeService.findById(employeeId);
-
-        if (theEmployee == null) {
-            throw new RuntimeException("Employee id not found - " + employeeId);
-        }
-        //servletResponse.addCookie(new Cookie("myCookie1", "cookieVal1"));
-        //servletResponse.addCookie(new Cookie("myCookie2", "cookieVal2"));
-        //servletResponse.addCookie(new Cookie("myCookie3", "cookieVal3"));
-        servletResponse.addHeader("Set-Cookie", "myCookie1=cookieVal1");
-        servletResponse.addHeader("Set-Cookie", "myCookie2=cookieVal2");
-        servletResponse.addHeader("Set-Cookie", "myCookie3=cookieVal3");
-        return theEmployee;
-    }*/
 
 
 

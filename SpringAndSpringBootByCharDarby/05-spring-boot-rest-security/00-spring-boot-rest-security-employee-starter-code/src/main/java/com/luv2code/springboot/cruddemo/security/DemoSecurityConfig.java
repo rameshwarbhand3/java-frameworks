@@ -18,11 +18,21 @@ import javax.sql.DataSource;
 @Configuration
 public class DemoSecurityConfig {
   //Add Jdbc user access ---no more hardcoded user
-   @Bean
-   public UserDetailsManager userDetailsManager(DataSource dataSoure){
-      return new JdbcUserDetailsManager(dataSoure);//this tell spring to use jdbc authentication with datasource
-   }
+   //@Bean   //This is for default user and authentication
+   //public UserDetailsManager userDetailsManager(DataSource dataSoure){
+      //return new JdbcUserDetailsManager(dataSoure);//this tell spring to use jdbc authentication with datasource
+   //}
 
+
+    @Bean //This is for custom user and authorities table
+    public UserDetailsManager userDetailsManager(DataSource dataSource){
+        JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
+        //define query to retrieve user by username
+        jdbcUserDetailsManager.setUsersByUsernameQuery("select user_id,pw,active from members where user_id=?");
+        //define query to retrieve roles by username
+        jdbcUserDetailsManager.setAuthoritiesByUsernameQuery("select user_id,role from roles where user_id=?");
+        return jdbcUserDetailsManager;
+    }
    //Restricting api access based on role
    @Bean
    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
