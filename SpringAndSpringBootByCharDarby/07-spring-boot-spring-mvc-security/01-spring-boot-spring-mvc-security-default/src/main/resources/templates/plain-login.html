@@ -1,10 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-  <meta charset="UTF-8">
-  <title>Title</title>
+    <meta charset="UTF-8">
+    <title>Custom Login Page</title>
+    <style>
+        .failed{
+        color:red;
+        }
+
+    </style>
 </head>
 <body>
+<h3>My Custom Login Page</h3>
+<form action="#" th:action="@{/authenticateTheUser}" method="POST">
+    <!--Check for error message-->
+    <div th:if="${param.error}">
+        <i class="failed">Sorry! You entered invalid username and password</i>
+    </div>
 
+    <p>
+        username: <input type="text" name="username"/>
+    </p>
+    <p>
+        password: <input type="password" name="password"/>
+    </p>
+    <input type="submit" value="Login"/>
+</form>
 </body>
 </html>

@@ -1,10 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>luv2code LEADERS home page</title>
+
+    <script>
+    // JavaScript code
+    function greet() {
+      var name = prompt("What's your name?");
+      console.log(name);
+      alert("Hello, " + name + "!");
+
+    }
+  </script>
+
 </head>
 <body>
 
+<h2>luv2code Leaders Home Page</h2>
+<hr>
+<p>
+    See you in brazil,for our annual leadership retreat.
+    <br>
+    Keep this trip secret,don't tell the regular employee.
+</p>
+<br>
+<button onclick="greet()">Go To</button>
+
+<hr>
+<a th:href="@{/}">Back to homepage</a>
 </body>
 </html>
