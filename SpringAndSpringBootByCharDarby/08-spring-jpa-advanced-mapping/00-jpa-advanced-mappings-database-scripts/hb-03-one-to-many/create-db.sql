@@ -3,6 +3,12 @@ DROP SCHEMA IF EXISTS `hb-03-one-to-many`;
 CREATE SCHEMA `hb-03-one-to-many`;
 
 use `hb-03-one-to-many`;
+SELECT `instructor`.`id`,
+    `instructor`.`first_name`,
+    `instructor`.`last_name`,
+    `instructor`.`email`,
+    `instructor`.`instructor_detail_id`
+FROM `hb-03-one-to-many`.`instructor`;
 
 SET FOREIGN_KEY_CHECKS = 0;
 
